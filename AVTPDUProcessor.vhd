@@ -3,10 +3,6 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity AVTPDUProcessor is
-	-- just define our constants
-	generic(
-		AVTP_SUBTYPE : std_logic_vector(7 downto 0) := x"04" -- something we're looking for
-	);
 	port (
 		clk : in std_logic;
 		reset : in std_logic;
@@ -21,45 +17,35 @@ entity AVTPDUProcessor is
 end AVTPDUProcessor;
 
 architecture rtl of AVTPDUProcessor is 
+	-- constants
+	constant AVTP_SUBTYPE : std_logic_vector(7 downto 0) := x"04"; -- something we're looking for
 	
 	-- Timestamp array
 	type T_timestamp_arr is array (1 to 6) of std_logic_vector(63 downto 0);
-	SIGNAL timestamp_array : T_timestamp_arr;
+	signal timestamp_array : T_timestamp_arr;
 	
 	signal ts : std_logic_vector(63 downto 0);
 	signal ts_val : std_logic := '0';
 	
 	-- Data from the CRF Frame
-	SIGNAL SUB_TYPE : std_logic_vector (7 downto 0);
-	SIGNAL SV : std_logic; -- Stream valid
-	SIGNAL MR : std_logic; -- Media Clock Reset
-	SIGNAL TU : std_logic; -- timestamp uncertain
-	SIGNAL SEQ_NUM: std_logic_vector (7 downto 0) := (others => '0'); -- Increases with each new frame sent
-	SIGNAL CRF_TYPE : std_logic_vector (7 downto 0); -- expect AVTP subtype of x04 here
-	SIGNAL STREAM_ID : std_logic_vector (127 downto 0);
-	SIGNAL PULL : std_logic_vector (2 downto 0);
-	SIGNAL BASE_FREQ : std_logic_vector (28 downto 0);
-	SIGNAL CRF_DATA_LEN : std_logic_vector (15 downto 0);
-	SIGNAL TS_INTERVAL : std_logic_vector (15 downto 0); -- number of clock events between timestamps
+	signal SUB_TYPE : std_logic_vector (7 downto 0);
+	signal SV : std_logic; -- Stream valid
+	signal MR : std_logic; -- Media Clock Reset
+	signal TU : std_logic; -- timestamp uncertain
+	signal SEQ_NUM: std_logic_vector (7 downto 0) := (others => '0'); -- Increases with each new frame sent
+	signal CRF_TYPE : std_logic_vector (7 downto 0); -- expect AVTP subtype of x04 here
+	signal STREAM_ID : std_logic_vector (127 downto 0);
+	signal PULL : std_logic_vector (2 downto 0);
+	signal BASE_FREQ : std_logic_vector (28 downto 0);
+	signal CRF_DATA_LEN : std_logic_vector (15 downto 0);
+	signal TS_INTERVAL : std_logic_vector (15 downto 0); -- number of clock events between timestamps
 	
 	-- FSM
-	TYPE State_type IS (ST_WAIT, ST_CONFIG, ST_TIMESTAMPS);  
-	SIGNAL state : State_Type := ST_WAIT;  -- Create a signal that uses the state
+	type State_type is (ST_WAIT, ST_CONFIG, ST_TIMESTAMPS);  
+	signal state : State_Type := ST_WAIT;  -- Create a signal that uses the state
 	-- FSM for config data
-	TYPE config_states IS (C_ST_STREAMID, C_ST_FREQ, C_ST_CRF_DATA);  
-	SIGNAL CONFIG_STATE : config_states := C_ST_STREAMID;  -- Create a signal that uses the state
-		
-	attribute syn_keep : boolean;
-	attribute keep : boolean;
-	attribute syn_keep of SV : SIGNAL is true;
-	attribute syn_keep of MR : SIGNAL is true;
-	attribute syn_keep of TU : SIGNAL is true;
-	attribute syn_keep of SEQ_NUM : SIGNAL is true;
-	attribute syn_keep of PULL : SIGNAL is true;
-	attribute syn_keep of BASE_FREQ : SIGNAL is true;
-	attribute syn_keep of CRF_DATA_LEN : SIGNAL is true;
-	attribute syn_keep of TS_INTERVAL : SIGNAL is true;
-	attribute syn_keep of timestamp_array : SIGNAL is true;
+	TYPE config_states is (C_ST_STREAMID, C_ST_FREQ, C_ST_CRF_DATA);  
+	type CONFIG_STATE : config_states := C_ST_STREAMID;  -- Create a signal that uses the state
 	
 begin
 	
@@ -133,7 +119,6 @@ begin
 						timestamp_msb := true; -- FORCED MSB HIGH HERE
 				end case;
 			
-			-- DEBUG ISSUE HERE
 			when ST_TIMESTAMPS =>
 				if ts_val = '1' then
 					-- write to the fifo
@@ -152,7 +137,7 @@ begin
 					ts_count  := ts_count + 1;
 					timestamp_out(31 downto 0) <= datain;
 					ts_val <= '1';
-						if buffer_full = '0' then -- Added this check to prevent writing if full and potentially corrupting data
+						if buffer_full = '0' then 
 							timestamp_valid <= '1';
 						end if;
 					
