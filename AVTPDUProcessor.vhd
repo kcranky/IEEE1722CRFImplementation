@@ -44,8 +44,8 @@ architecture rtl of AVTPDUProcessor is
 	type State_type is (ST_WAIT, ST_CONFIG, ST_TIMESTAMPS);  
 	signal state : State_Type := ST_WAIT;  -- Create a signal that uses the state
 	-- FSM for config data
-	TYPE config_states is (C_ST_STREAMID, C_ST_FREQ, C_ST_CRF_DATA);  
-	type CONFIG_STATE : config_states := C_ST_STREAMID;  -- Create a signal that uses the state
+	type config_states is (C_ST_STREAMID, C_ST_FREQ, C_ST_CRF_DATA);  
+	signal CONFIG_STATE : config_states := C_ST_STREAMID;  -- Create a signal that uses the state
 	
 begin
 	
