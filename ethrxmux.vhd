@@ -4,9 +4,6 @@ use ieee.numeric_std.all;
 
 
 entity ethrxmux is
-	generic(
-		AVTP_TYPE : std_logic_vector(15 downto 0) := x"22F0" -- ETH TYPE for AVTP Packets
-	);
 	port (
 		clk : in std_logic;
 		packet_start, packet_end, valid, reset : in std_logic;
@@ -18,11 +15,12 @@ entity ethrxmux is
 end ethrxmux;
 
 architecture rtl of ethrxmux is 
-
+	constant AVTP_TYPE : std_logic_vector(15 downto 0) := x"22F0"; -- ETH TYPE for AVTP Packets
+	
 	-- FSM
-	TYPE State_type IS (ST_CONFIG, ST_START, ST_HEADER, ST_RECEIVE);  
-	SIGNAL state : State_Type := ST_CONFIG; 
-	SIGNAL rxready_int : std_logic := '1';
+	type State_type is (ST_CONFIG, ST_START, ST_HEADER, ST_RECEIVE);  
+	signal state : State_Type := ST_CONFIG; 
+	signal rxready_int : std_logic := '1';
 
 begin
 
