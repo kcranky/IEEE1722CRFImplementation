@@ -1,12 +1,28 @@
+-- Filename: 
+--   crfframegen.vhd
+
+-- Description:
+--   Takes timestamps stored in a dual clock FIFO 
+--   Wraps them in an ETH2 Frame in the CRF AVTPDU Format
+--   Transmits this data to the Intel TSE IP for transmission over Ethernet
+
+-- Author:
+--  Keegan Crankshaw
+
+-- Date: 
+--   December 2020
+
+-- Available on GitHub: 
+--   https://github.com/kcranky/IEEE1722CRFImplementation
+
+-- Licence: 
+--   MIT
+--   https://github.com/kcranky/IEEE1722CRFImplementation/blob/main/LICENSE
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
---TODO
-----See Table 27 for TX and RX latency
--- -- Stream valid
--- -- Timestamp uncertain
--- -- ST_WAIT delay length to ensure 50 packets/S
 
 entity crfframegen is
 	-- just define our constants

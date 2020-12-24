@@ -1,3 +1,23 @@
+-- Filename: 
+--   top.vhd
+
+-- Description:
+--   Top level module for the IEEE 1722 CRF Implementation
+
+-- Author:
+--  Keegan Crankshaw
+--  Original Intel TSE IP instantiation by industry partner
+
+-- Date: 
+--   December 2020
+
+-- Available on GitHub: 
+--   https://github.com/kcranky/IEEE1722CRFImplementation
+
+-- Licence: 
+--   MIT
+--   https://github.com/kcranky/IEEE1722CRFImplementation/blob/main/LICENSE
+
 library ieee;
 use ieee.std_logic_1164.all;
 

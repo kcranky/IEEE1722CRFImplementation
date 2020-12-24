@@ -1,3 +1,22 @@
+-- Filename: 
+--   clkdiv.vhd
+
+-- Description:
+--   Asynchrnous clock divider
+
+-- Author:
+--  Code provided by industry partner
+
+-- Date: 
+--   December 2020
+
+-- Available on GitHub: 
+--   https://github.com/kcranky/IEEE1722CRFImplementation
+
+-- Licence: 
+--   MIT
+--   https://github.com/kcranky/IEEE1722CRFImplementation/blob/main/LICENSE
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

@@ -1,3 +1,27 @@
+-- Filename: 
+--   AVTPDUProccesor.vhd
+
+-- Description:
+--   Processes AVTP Data Units and extracts relevant information
+--   Stores received timestamps in a dual clock FIFO for use by CSGEN
+
+-- Author:
+--  Keegan Crankshaw
+
+-- Date: 
+--   December 2020
+
+-- Available on GitHub: 
+--   https://github.com/kcranky/IEEE1722CRFImplementation
+
+-- Licence: 
+--   MIT
+--   https://github.com/kcranky/IEEE1722CRFImplementation/blob/main/LICENSE
+
+
+
+
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

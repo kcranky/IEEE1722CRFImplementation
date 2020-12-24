@@ -1,3 +1,24 @@
+-- Filename: 
+--   csgen.vhd
+
+-- Description:
+--   Compares talker and listener timestamps
+--   Determines a phase difference between the two
+--   Controls the phase of the listener media clock by controlling a CS2000 IC
+
+-- Author:
+--  Keegan Crankshaw
+
+-- Date: 
+--   December 2020
+
+-- Available on GitHub: 
+--   https://github.com/kcranky/IEEE1722CRFImplementation
+
+-- Licence: 
+--   MIT
+--   https://github.com/kcranky/IEEE1722CRFImplementation/blob/main/LICENSE
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;

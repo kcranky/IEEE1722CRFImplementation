@@ -1,3 +1,23 @@
+-- Filename: 
+--   ethrxmux.vhd
+
+-- Description:
+--   Ethernet Receiving module that works with Intel TSE IP
+--   Triggers flag to AVTPDUProcessor when an AVTPDU is detected
+
+-- Author:
+--  Keegan Crankshaw
+
+-- Date: 
+--   December 2020
+
+-- Available on GitHub: 
+--   https://github.com/kcranky/IEEE1722CRFImplementation
+
+-- Licence: 
+--   MIT
+--   https://github.com/kcranky/IEEE1722CRFImplementation/blob/main/LICENSE
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
